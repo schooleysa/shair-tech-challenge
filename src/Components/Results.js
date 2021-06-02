@@ -2,13 +2,7 @@ import { useState } from 'react';
 
 const Results = (props) => {
 
-    const [ emptyList, setEmptyList ] = useState(false)
     const [ moreInfo, setMoreInfo ] = useState(false)
-    
-    const checkList = () => {if (props.searchResult.length === 0) {
-        setEmptyList(true);
-        }
-    }
 
     const showInfo = () => setMoreInfo(!moreInfo);
 
@@ -16,7 +10,7 @@ const Results = (props) => {
     
     const listVehicle = props.searchResult.map((vehicle) => {
         return (
-            <div>
+            <div key={vehicle.Model_ID}>
             <div className="vehicleContainer">
                 <li>{vehicle.Model_Name}</li> 
                 <div>
@@ -37,7 +31,7 @@ const Results = (props) => {
 
     return (
         <div>
-            {emptyList ?
+            {props.emptyList ?
             (<p className="error"> There are no results for this search!</p>)
             :
             (<div>

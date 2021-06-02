@@ -33,6 +33,7 @@ header {
 
 h1 {
   text-transform: uppercase;
+  text-align: center;
   font-size: 3rem;
   letter-spacing: 2rem;
 }
@@ -45,8 +46,9 @@ span {
 /* SEARCHBAR STLYING */
 
 section {
-  height: calc(100vh - 150px);
-  margin-top: 20px;
+  height: 100vh;
+  padding-top: 20px;
+  background-color: rgb(248, 248, 248);
 }
 
 h3 {
@@ -105,6 +107,7 @@ ul {
 
 li {
   display: inline;
+  margin-bottom: 10px;
 }
 
 .vehicleContainer {
@@ -152,3 +155,61 @@ a {
   color: white;
   margin: 0 10px 0 10px;
 }
+
+/* MEDIA QUERIES */
+
+@media (max-width: 1000px) {
+  .searchbar {
+    width: 95%;
+  }
+}
+
+@media (max-width: 900px) {
+  .searchbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .searchbar form{
+    flex-direction: column;
+  }
+
+  .container{
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 800px) {
+  h1 {
+    font-size: 2.5rem;
+    letter-spacing: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .vehicleContainer {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 450px) {
+  h3 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 350px) {
+  header {
+    height: 175px;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    letter-spacing: 1rem;
+  }
+}
+
+

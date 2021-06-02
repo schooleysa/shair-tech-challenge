@@ -1,5 +1,5 @@
 import Results from "./Results"
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 
@@ -10,36 +10,52 @@ const Searchbar = () => {
     const [ selectedYear, setSelectedYear ] = useState("2021");
     const [ searchResult, setSearchResult ] = useState([])
     const [ showSearch, setShowSearch] = useState(true)
+    const [ emptyList, setEmptyList ] = useState(false)
 
     const submit = (e) => {
         e.preventDefault();
-        axios({
-            url: `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformakeyear/make/${selectedMake}/modelyear/${selectedYear}/vehicleType/${selectedType}?format=json`,
-            method: "GET",
-            dataResponse: "json",
-            // params: {
-            //   make: selectedMake,
-            //   modelyear: selectedYear,
-            //   vehicleType: selectedType,
-            //   format: "json",
-            // },
-          }).then((response) => {
-            setSearchResult(response.data.Results);
-            setShowSearch(false)
-          });
+        if (selectedMake !== "" && selectedType !== "") {
+            axios({
+                url: `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformakeyear/make/${selectedMake}/modelyear/${selectedYear}/vehicleType/${selectedType}?format=json`,
+                method: "GET",
+                dataResponse: "json",
+                // params: {
+                //   make: selectedMake,
+                //   modelyear: selectedYear,
+                //   vehicleType: selectedType,
+                //   format: "json",
+                // },
+            }).then((response) => {
+                if (response.data.Results.length === 0) {
+                    setEmptyList(true)
+                    setShowSearch(false)
+                } else if (response.data.Results.length > 5) {
+                    setSearchResult(response.data.Results.slice(0,5));
+                    setShowSearch(false)
+                } else {
+                    setSearchResult(response.data.Results);
+                    setShowSearch(false)
+                }  
+            });
+        } else {
+            alert("Please select all search parameters")
+        }
     }
 
-    const handleMake = (e) =>
-    setSelectedMake(e.target.value);
+    const handleMake = (e) => setSelectedMake(e.target.value);
    
-    const handleType = (e) =>
-    setSelectedType(e.target.value)
+    const handleType = (e) => setSelectedType(e.target.value)
 
-    const handleYear = (e) =>
-    setSelectedYear(e.target.value)
+    const handleYear = (e) => setSelectedYear(e.target.value)
 
-    const toggleSearch = () =>
-    setShowSearch(true)
+    const toggleSearch = () => setShowSearch(true)
+    
+    const toggleList = () => setEmptyList(false)
+
+    const toggle = () => {
+        toggleList()
+        toggleSearch()
+    }
 
     return (
         <section>
@@ -50,7 +66,7 @@ const Searchbar = () => {
                     <div className="container">        
                         <label htmlFor="make">Choose a vehicle make:</label>
                             <select onChange={handleMake} name="make" id="make">
-                                <option selected disabled value=""></option>
+                                <option defaultValue=""></option>
                                 <option value="aston-martin">Aston Martin</option>
                                 <option value="cadillac">Cadillac</option>
                                 <option value="chevrolet">Chevrolet</option>
@@ -74,7 +90,7 @@ const Searchbar = () => {
                     <div className="container">  
                         <label htmlFor="type">Choose a vehicle type:</label>
                             <select onChange={handleType} name="type" id="type">
-                                <option selected disabled value=""></option>
+                                <option defaultValue=""></option>
                                 <option value="car">Car</option>
                                 <option value="truck">Truck</option>
                                 <option value="motorcycle">Motorcycle</option>
@@ -90,8 +106,8 @@ const Searchbar = () => {
         :
         (
         <div className="resultsList">
-            <Results searchResult={searchResult} make={selectedMake} year={selectedYear} type={selectedType}/>
-            <button onClick={toggleSearch}>New Search</button>
+            <Results searchResult={searchResult} make={selectedMake} year={selectedYear} type={selectedType} emptyList={emptyList}/>
+            <button onClick={toggle}>New Search</button>
         </div>
         )}
     </section>    
