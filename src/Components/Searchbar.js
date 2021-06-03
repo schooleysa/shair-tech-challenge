@@ -42,10 +42,8 @@ const Searchbar = () => {
         }
     }
 
-    const handleMake = (e) => setSelectedMake(e.target.value);
-   
+    const handleMake = (e) => setSelectedMake(e.target.value);  
     const handleType = (e) => setSelectedType(e.target.value)
-
     const handleYear = (e) => setSelectedYear(e.target.value)
 
     const toggleSearch = () => setShowSearch(true)
@@ -67,33 +65,32 @@ const Searchbar = () => {
                         <label htmlFor="make">Choose a vehicle make:</label>
                             <select onChange={handleMake} name="make" id="make">
                                 <option defaultValue=""></option>
-                                <option value="aston-martin">Aston Martin</option>
-                                <option value="cadillac">Cadillac</option>
-                                <option value="chevrolet">Chevrolet</option>
-                                <option value="dodge">Dodge</option>
-                                <option value="ferrari">Ferrari</option>
-                                <option value="ford">Ford</option>
-                                <option value="honda">Honda</option>
-                                <option value="jaguar">Jaguar</option>
-                                <option value="lamborghini">Lamborghini</option>
-                                <option value="maserati">Maserati</option>
-                                <option value="mazda">Mazda</option>
-                                <option value="mercedes-benz">Mercedes Benz</option>
-                                <option value="nissan">Nissan</option>
-                                <option value="saab">Saab</option>
-                                <option value="saturn">Saturn</option>
-                                <option value="subaru">Subaru</option>
-                                <option value="tesla">Tesla</option>
-                                <option value="toyota">Toyota</option>
+                                <option value="Cadillac">Cadillac</option>
+                                <option value="Chevrolet">Chevrolet</option>
+                                <option value="Dodge">Dodge</option>
+                                <option value="Ferrari">Ferrari</option>
+                                <option value="Ford">Ford</option>
+                                <option value="Honda">Honda</option>
+                                <option value="Jaguar">Jaguar</option>
+                                <option value="Lamborghini">Lamborghini</option>
+                                <option value="Maserati">Maserati</option>
+                                <option value="Mazda">Mazda</option>
+                                <option value="Mercedes-benz">Mercedes Benz</option>
+                                <option value="Nissan">Nissan</option>
+                                <option value="Saab">Saab</option>
+                                <option value="Saturn">Saturn</option>
+                                <option value="Subaru">Subaru</option>
+                                <option value="Tesla">Tesla</option>
+                                <option value="Toyota">Toyota</option>
                             </select>
                     </div>     
                     <div className="container">  
                         <label htmlFor="type">Choose a vehicle type:</label>
                             <select onChange={handleType} name="type" id="type">
                                 <option defaultValue=""></option>
-                                <option value="car">Car</option>
-                                <option value="truck">Truck</option>
-                                <option value="motorcycle">Motorcycle</option>
+                                <option value="Car">Car</option>
+                                <option value="Truck">Truck</option>
+                                <option value="Motorcycle">Motorcycle</option>
                             </select>
                     </div>     
                 <div className="container">  
